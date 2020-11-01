@@ -30,7 +30,7 @@ class BarycentricLagrange:
         numerator = 0
         denominator = 0
         for i in range(len(self.data_points)):
-            if (x-self.data_points[i].x) == 0:      # if the point exists in data points.
+            if (x-self.data_points[i].x) == 0:      # if x exists in data points.
                 return self.data_points[i].y
             temp = self.weights[i] / (x-self.data_points[i].x)
             denominator += temp
