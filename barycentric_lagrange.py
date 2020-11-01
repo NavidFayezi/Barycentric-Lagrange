@@ -11,8 +11,12 @@ class BarycentricLagrange:
 
     # initialize the class with data points
     def __init__(self, data_points):
+        # data_points is an array of Point objects
         self.data_points = data_points
         self.weights = []
+        # calculate the weight of initial data points
+        for i in range(len(self.data_points)):
+            self.calculate_weight(i)
 
     # calculate the weight of data_points[point_index]
     def calculate_weight(self, point_index):
@@ -26,6 +30,8 @@ class BarycentricLagrange:
         numerator = 0
         denominator = 0
         for i in range(len(self.data_points)):
+            if (x-self.data_points[i].x) == 0:      # if the point exists in data points.
+                return self.data_points[i].y
             temp = self.weights[i] / (x-self.data_points[i].x)
             denominator += temp
             numerator += temp * self.data_points[i].y
@@ -46,13 +52,29 @@ class BarycentricLagrange:
 
 
 if __name__ == "__main__":
-    point1 = Point(2, 4)
-    point2 = Point(3, 9)
-    point3 = Point(1, 1)
-    dp = [point1, point2]
+    point1 = Point(4, 21/5)
+    point2 = Point(3/4, 11.7)
+    point3 = Point(2.5, 531/5)
+    point5 = Point(1.5, 10)
+    point6 = Point(2.5, 5.5)
+    point7 = Point(4.5, 80)
+    new_points = [point5, point6, point7]
+    dp = [point1, point2, point3]
     bl = BarycentricLagrange(dp)
-    for i in range(len(dp)):
-        bl.calculate_weight(i)
-    print(bl.interpolation(5))
-    bl.add_point(point3)
-    print(bl.interpolation(5))
+
+    print("interpolation with initial data points:")
+    print(bl.interpolation(1.7))
+    print(bl.interpolation(2.3))
+    print(bl.interpolation(3.2))
+    print(bl.interpolation(3.5))
+    print(bl.interpolation(4.2))
+
+    for i in range(3):
+        print("after adding new data point #",i+1)
+        bl.add_point(new_points[i])
+        print(bl.interpolation(1.7))
+        print(bl.interpolation(2.3))
+        print(bl.interpolation(3.2))
+        print(bl.interpolation(3.5))
+        print(bl.interpolation(4.2))
+
