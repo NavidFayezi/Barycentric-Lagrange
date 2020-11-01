@@ -1,0 +1,2 @@
+# Barycentric Lagrange Interpolation
+> This piece of code calculates the true form of barycentric lagrange interpolation of a given point. Visit *https://en.wikipedia.org/wiki/Lagrange_polynomial#Barycentric_form* to learn more about this method.
